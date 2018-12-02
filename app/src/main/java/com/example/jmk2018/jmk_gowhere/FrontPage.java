@@ -17,7 +17,7 @@ public class FrontPage extends FirebaseUIActivity implements
         View.OnClickListener{
 
     //Hihihihi
-    //diu
+    //diu lei
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
