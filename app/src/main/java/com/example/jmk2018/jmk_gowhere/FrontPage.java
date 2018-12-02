@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class FrontPage extends FirebaseUIActivity implements
         View.OnClickListener{
 
-    //Fuck you
+    //Hihihihi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
