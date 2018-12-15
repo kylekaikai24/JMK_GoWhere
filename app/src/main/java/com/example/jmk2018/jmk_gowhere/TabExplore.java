@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -38,6 +39,11 @@ public class TabExplore extends Fragment {
     private ImageView imgHotSearch3;
     private ImageView imgHotSearch4;
 
+    private TextView txtHotSearch1;
+    private TextView txtHotSearch2;
+    private TextView txtHotSearch3;
+    private TextView txtHotSearch4;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +71,11 @@ public class TabExplore extends Fragment {
         imgHotSearch3 = rootView.findViewById(R.id.imgHotSearch3);
         imgHotSearch4 = rootView.findViewById(R.id.imgHotSearch4);
 
+        txtHotSearch1 = rootView.findViewById(R.id.txtHotSearch1);
+        txtHotSearch2 = rootView.findViewById(R.id.txtHotSearch2);
+        txtHotSearch3 = rootView.findViewById(R.id.txtHotSearch3);
+        txtHotSearch4 = rootView.findViewById(R.id.txtHotSearch4);
+
         return rootView;
     }
 
@@ -73,7 +84,7 @@ public class TabExplore extends Fragment {
         super.onStart();
 
         FirebaseRecyclerAdapter<Database, CardviewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Database, CardviewHolder>
-                (Database.class, R.layout.database_cardview, CardviewHolder.class, mDatabase){
+                (Database.class, R.layout.database_cardview_new, CardviewHolder.class, mDatabase){
 
             @Override
             protected void populateViewHolder(final CardviewHolder viewHolder, Database model, int position){
@@ -166,6 +177,10 @@ public class TabExplore extends Fragment {
                 String imgUrl2 = dataSnapshot.child("2").getValue(String.class);
                 String imgUrl3 = dataSnapshot.child("3").getValue(String.class);
                 String imgUrl4 = dataSnapshot.child("4").getValue(String.class);
+                String txt1 = dataSnapshot.child("5").getValue(String.class);
+                String txt2 = dataSnapshot.child("6").getValue(String.class);
+                String txt3 = dataSnapshot.child("7").getValue(String.class);
+                String txt4 = dataSnapshot.child("8").getValue(String.class);
 
                 Picasso.with(getContext()).load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
@@ -179,6 +194,11 @@ public class TabExplore extends Fragment {
                 Picasso.with(getContext()).load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 2, true, true)).
                         into(imgHotSearch4);
+
+                txtHotSearch1.setText(txt1);
+                txtHotSearch2.setText(txt2);
+                txtHotSearch3.setText(txt3);
+                txtHotSearch4.setText(txt4);
 
             }
 
