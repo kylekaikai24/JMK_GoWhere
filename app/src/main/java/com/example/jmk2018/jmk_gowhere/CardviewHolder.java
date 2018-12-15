@@ -89,7 +89,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
     public void setImage(Context context, String imageUrl){
         cImage = imageUrl;
         ImageView card_image = mView.findViewById(R.id.cardviewImage);
-        Picasso.with(context).load(imageUrl).into(card_image);
+        Picasso.with(context).load(imageUrl).transform(new RoundCornersTransformation(20, 20, true, true)).into(card_image);
     }
     public void setPhone(String phone){
         cPhoneNumber = phone;

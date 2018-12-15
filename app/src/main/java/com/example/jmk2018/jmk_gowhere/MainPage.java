@@ -30,6 +30,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +67,7 @@ public class MainPage extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle mToggle;
 
+    LinearLayout linHotSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,7 @@ public class MainPage extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
+        linHotSearch = (LinearLayout) findViewById(R.id.linHotSearch);
 
 
 

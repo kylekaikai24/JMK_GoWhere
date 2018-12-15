@@ -22,7 +22,7 @@ public class FrontPage extends FirebaseUIActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
 
-        //ImageView backgroundImage = (ImageView) findViewById(R.id.backgroundImage);
+        ImageView backgroundImage = (ImageView) findViewById(R.id.backgroundImage);
         findViewById(R.id.signOutButton).setOnClickListener(this);
         findViewById(R.id.signInWithEmailButton).setOnClickListener(this);
         findViewById(R.id.signInWithGmailButton).setOnClickListener(this);
@@ -33,6 +33,15 @@ public class FrontPage extends FirebaseUIActivity implements
                 && ActivityCompat.checkSelfPermission(FrontPage.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(FrontPage.this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+
+        backgroundImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentToMainPage = new Intent();
+                intentToMainPage.setClass(FrontPage.this,MainPage.class);
+                startActivity(intentToMainPage);
+            }
+        });
 
     }
 
@@ -63,6 +72,8 @@ public class FrontPage extends FirebaseUIActivity implements
             findViewById(R.id.signInWithGmailButton).setVisibility(View.VISIBLE);
 
         }
+
+
     }
 
     @Override
