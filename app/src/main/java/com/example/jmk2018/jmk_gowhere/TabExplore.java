@@ -112,7 +112,6 @@ public class TabExplore extends Fragment {
 
                     }
                 });*/
-                // cardview design and explore layout refiine
 
 
 

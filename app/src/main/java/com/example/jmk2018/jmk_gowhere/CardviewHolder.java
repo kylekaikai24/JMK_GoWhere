@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.util.Preconditions;
 
 public class CardviewHolder extends RecyclerView.ViewHolder{
 
@@ -33,6 +37,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
     Integer cBooking;
 
     ImageView likeButton;
+    ImageView likeArea;
     DatabaseReference mDatabaseLike;
     FirebaseAuth mAuth;
 
@@ -52,10 +57,10 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), CardViewTabbed.class);
+                intent.putExtra("ImageUrl",cImage);
                 intent.putExtra("Category",cCategory);
                 intent.putExtra("Name",cName);
                 intent.putExtra("Location",cLocation);
-                intent.putExtra("ImageUrl",cImage);
                 intent.putExtra("Phone Number",cPhoneNumber);
                 intent.putExtra("Link",cLink);
                 intent.putExtra("Address",cAddress);
@@ -66,7 +71,6 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
                 v.getContext().startActivity(intent);
             }
         });
-
 
 
 
@@ -89,7 +93,9 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
     public void setImage(Context context, String imageUrl){
         cImage = imageUrl;
         ImageView card_image = mView.findViewById(R.id.cardviewImage);
-        Picasso.with(context).load(imageUrl).into(card_image);
+        //Picasso.with(context).load(imageUrl).fit().noFade().into(card_image);
+        Glide.with(context).load(imageUrl).into(card_image);
+
     }
     public void setPhone(String phone){
         cPhoneNumber = phone;

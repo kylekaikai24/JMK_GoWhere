@@ -41,7 +41,7 @@
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="220dp"
                     android:scaleType="centerCrop"
                     app:srcCompat="@color/colorPrimaryDark"
                     tools:layout_editor_absoluteY="56dp" />
@@ -50,26 +50,65 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginEnd="0dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="#F97E39"
                     android:gravity="center"
-                    android:paddingBottom="3dp"
                     android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
                     android:text="Name"
                     android:textColor="#000000"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/image"
                     app:layout_constraintEnd_toEndOf="@+id/image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/image" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    app:srcCompat="@android:color/holo_blue_light" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mapButton2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/baseline_place_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="241dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@android:color/holo_blue_light" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="289dp"
+                        android:layout_height="26dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="Address"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/mapButton2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+                </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

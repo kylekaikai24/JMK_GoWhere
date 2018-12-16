@@ -21,26 +21,26 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
+import com.bumptech.glide.Glide;
 
 public class CardViewTabbed extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String cardCategory;
-    private String cardName;
-    private String cardLocation;
-    private String cardImageUrl;
-    private String cardPhoneNumber;
-    private String cardLink;
-    private String cardAddress;
-    private Double cardLatitude;
-    private Double cardLongitude;
-    private Integer cardNumofLikes;
+//    private String cardCategory;
+//    private String cardName;
+//    private String cardLocation;
+//    private String cardImageUrl;
+      private String cardPhoneNumber;
+      private String cardLink;
+//    private String cardAddress;
+      private Double cardLatitude;
+      private Double cardLongitude;
+//    private Integer cardNumofLikes;
+      private ProgressBar imgProgressBar;
 
     private static final int REQUEST_PHONE_CALL = 1;
 
@@ -48,6 +48,10 @@ public class CardViewTabbed extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_tabbed);
+
+        ImageView imgImage = (ImageView) findViewById(R.id.image);
+        String cardImageUrl = getIntent().getStringExtra("ImageUrl");
+        Glide.with(this).load(cardImageUrl).into(imgImage);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,9 +61,7 @@ public class CardViewTabbed extends AppCompatActivity
         TextView txtCategory = (TextView) findViewById(R.id.category);
         TextView txtPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         TextView txtLink = (TextView) findViewById(R.id.link);
-        TextView txtAddress = (TextView) findViewById(R.id.address);
-        ImageView imgImage = (ImageView) findViewById(R.id.image);
-        //TextView numOfLike = (TextView) findViewById(R.id.numOfLike);
+        TextView txtAddress = (TextView) findViewById(R.id.textView3);
 
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.cardviewtabbed_content);
 
@@ -72,13 +74,12 @@ public class CardViewTabbed extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        cardCategory = getIntent().getStringExtra("Category");
-        cardName = getIntent().getStringExtra("Name");
-        cardLocation = getIntent().getStringExtra("Location");
-        cardImageUrl = getIntent().getStringExtra("ImageUrl");
+        String cardCategory = getIntent().getStringExtra("Category");
+        String cardName = getIntent().getStringExtra("Name");
+        String cardLocation = getIntent().getStringExtra("Location");
+        String cardAddress = getIntent().getStringExtra("Address");
         cardPhoneNumber = getIntent().getStringExtra("Phone Number");
         cardLink = getIntent().getStringExtra("Link");
-        cardAddress = getIntent().getStringExtra("Address");
         cardLatitude = getIntent().getDoubleExtra("Latitude", 0.00);
         cardLongitude = getIntent().getDoubleExtra("Longitude", 0.00);
 
@@ -88,7 +89,7 @@ public class CardViewTabbed extends AppCompatActivity
         txtPhoneNumber.setText(cardPhoneNumber);
         txtLink.setText(cardLink);
         txtAddress.setText(cardAddress);
-        Picasso.with(this).load(cardImageUrl).into(imgImage);
+
 
 
         txtAddress.setOnClickListener(new View.OnClickListener() {
