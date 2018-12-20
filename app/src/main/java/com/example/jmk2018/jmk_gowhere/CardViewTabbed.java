@@ -1,10 +1,12 @@
 package com.example.jmk2018.jmk_gowhere;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -26,42 +28,64 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.ImageViewTargetFactory;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import static java.security.AccessController.getContext;
 
 public class CardViewTabbed extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-//    private String cardCategory;
-//    private String cardName;
-//    private String cardLocation;
-//    private String cardImageUrl;
-      private String cardPhoneNumber;
-      private String cardLink;
-//    private String cardAddress;
-      private Double cardLatitude;
-      private Double cardLongitude;
-//    private Integer cardNumofLikes;
-      private ProgressBar imgProgressBar;
+    private String cardCategory;
+    private String cardName;
+    //private String cardLocation;
+    private String cardImageUrl;
+    private String cardPhoneNumber;
+    private String cardLink;
+    private String cardAddress;
+    private Double cardLatitude;
+    private Double cardLongitude;
+    //private Integer cardNumofLikes;
+    //private ProgressBar imgProgressBar;
+
+    private DatabaseReference mDatabaseHotSearch;
+
+    private ImageView photo1;
+    private ImageView photo2;
+    private ImageView photo3;
+    private ImageView photo4;
 
     private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_tabbed);
+        setContentView(R.layout.activity_card_tabbed_new);
 
         ImageView imgImage = (ImageView) findViewById(R.id.image);
-        String cardImageUrl = getIntent().getStringExtra("ImageUrl");
+        cardImageUrl = getIntent().getStringExtra("ImageUrl");
         Glide.with(this).load(cardImageUrl).into(imgImage);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         TextView txtName = (TextView) findViewById(R.id.name);
-        TextView txtLocation = (TextView) findViewById(R.id.location);
+        //TextView txtLocation = (TextView) findViewById(R.id.location);
         TextView txtCategory = (TextView) findViewById(R.id.category);
         TextView txtPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         TextView txtLink = (TextView) findViewById(R.id.link);
-        TextView txtAddress = (TextView) findViewById(R.id.textView3);
+        TextView txtAddress = (TextView) findViewById(R.id.address);
+
+        photo1 = (ImageView) findViewById(R.id.photo1);
+        photo2 = (ImageView) findViewById(R.id.photo2);
+        photo3 = (ImageView) findViewById(R.id.photo3);
+        photo4 = (ImageView) findViewById(R.id.photo4);
 
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.cardviewtabbed_content);
 
@@ -74,10 +98,10 @@ public class CardViewTabbed extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String cardCategory = getIntent().getStringExtra("Category");
-        String cardName = getIntent().getStringExtra("Name");
-        String cardLocation = getIntent().getStringExtra("Location");
-        String cardAddress = getIntent().getStringExtra("Address");
+        cardCategory = getIntent().getStringExtra("Category");
+        cardName = getIntent().getStringExtra("Name");
+        //String cardLocation = getIntent().getStringExtra("Location");
+        cardAddress = getIntent().getStringExtra("Address");
         cardPhoneNumber = getIntent().getStringExtra("Phone Number");
         cardLink = getIntent().getStringExtra("Link");
         cardLatitude = getIntent().getDoubleExtra("Latitude", 0.00);
@@ -85,12 +109,44 @@ public class CardViewTabbed extends AppCompatActivity
 
         txtCategory.setText(cardCategory);
         txtName.setText(cardName);
-        txtLocation.setText(cardLocation);
+        //txtLocation.setText(cardLocation);
         txtPhoneNumber.setText(cardPhoneNumber);
         txtLink.setText(cardLink);
         txtAddress.setText(cardAddress);
 
+        mDatabaseHotSearch = FirebaseDatabase.getInstance().getReference().child("HotSearch");
 
+        mDatabaseHotSearch.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String imgUrl1 = dataSnapshot.child("1").getValue(String.class);
+                String imgUrl2 = dataSnapshot.child("2").getValue(String.class);
+                String imgUrl3 = dataSnapshot.child("3").getValue(String.class);
+                String imgUrl4 = dataSnapshot.child("4").getValue(String.class);
+
+                Picasso.get().load(imgUrl1).
+                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        into(photo1);
+                Picasso.get().load(imgUrl1).
+                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        into(photo2);
+                Picasso.get().load(imgUrl1).
+                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        into(photo3);
+                Picasso.get().load(imgUrl1).
+                        transform(new RoundCornersTransformation(20, 2, true, true)).
+                        into(photo4);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
 
         txtAddress.setOnClickListener(new View.OnClickListener() {
             @Override

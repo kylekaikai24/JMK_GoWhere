@@ -67,7 +67,7 @@ public class MainPage extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle mToggle;
 
-    LinearLayout linHotSearch;
+    //LinearLayout linHotSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainPage extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        linHotSearch = (LinearLayout) findViewById(R.id.linHotSearch);
+        //linHotSearch = (LinearLayout) findViewById(R.id.linHotSearch);
 
 
 

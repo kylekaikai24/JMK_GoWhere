@@ -181,16 +181,16 @@ public class TabExplore extends Fragment {
                 String txt3 = dataSnapshot.child("7").getValue(String.class);
                 String txt4 = dataSnapshot.child("8").getValue(String.class);
 
-                Picasso.with(getContext()).load(imgUrl1).
+                Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch1);
-                Picasso.with(getContext()).load(imgUrl1).
+                Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch2);
-                Picasso.with(getContext()).load(imgUrl1).
+                Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch3);
-                Picasso.with(getContext()).load(imgUrl1).
+                Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 2, true, true)).
                         into(imgHotSearch4);
 

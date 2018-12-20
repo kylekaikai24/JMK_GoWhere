@@ -60,7 +60,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
                 intent.putExtra("ImageUrl",cImage);
                 intent.putExtra("Category",cCategory);
                 intent.putExtra("Name",cName);
-                intent.putExtra("Location",cLocation);
+                //intent.putExtra("Location",cLocation);
                 intent.putExtra("Phone Number",cPhoneNumber);
                 intent.putExtra("Link",cLink);
                 intent.putExtra("Address",cAddress);
