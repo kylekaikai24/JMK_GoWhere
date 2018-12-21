@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -61,12 +62,17 @@ public class CardViewTabbed extends AppCompatActivity
     private ImageView photo3;
     private ImageView photo4;
 
+    private TextView allPhotos;
+
     private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_tabbed_new);
+
+        allPhotos = (TextView) findViewById(R.id.allPhotos);
+        allPhotos.setPaintFlags(allPhotos.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         ImageView imgImage = (ImageView) findViewById(R.id.image);
         cardImageUrl = getIntent().getStringExtra("ImageUrl");

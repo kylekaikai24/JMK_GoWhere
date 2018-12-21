@@ -108,4 +108,6 @@
     <string name="signed_out">Signed Out</string>
     <string name="loading">Loading…</string>
     <string name="google_status_fmt">Google User: %s</string>
+    <string name="all_photos"> All Photos </string>
+    <string name="upload"> Upload </string>
 </resources>
