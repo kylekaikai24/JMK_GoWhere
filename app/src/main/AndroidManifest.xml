@@ -58,7 +58,8 @@
         <activity android:name=".FirebaseUIActivity" />
         <activity android:name=".EmailPasswordActivity" />
         <activity android:name=".GoogleSignInActivity" />
-        <activity android:name=".SearchItemActivity"></activity>
+        <activity android:name=".SearchItemActivity" />
+        <activity android:name=".PhotoGallery"></activity>
     </application>
 
 </manifest>

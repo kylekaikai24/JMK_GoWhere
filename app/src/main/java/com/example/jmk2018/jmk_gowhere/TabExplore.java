@@ -1,5 +1,6 @@
 package com.example.jmk2018.jmk_gowhere;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -87,7 +88,7 @@ public class TabExplore extends Fragment {
                 (Database.class, R.layout.database_cardview_new, CardviewHolder.class, mDatabase){
 
             @Override
-            protected void populateViewHolder(final CardviewHolder viewHolder, Database model, int position){
+            protected void populateViewHolder(final CardviewHolder viewHolder, final Database model, int position){
 
                 final String post_key = getRef(position).getKey();
 
@@ -104,14 +105,26 @@ public class TabExplore extends Fragment {
                 viewHolder.setLikeButton(post_key);
                 viewHolder.setNumOfLikes(post_key);
 
-                /*viewHolder.mView.setOnClickListener(new View.OnClickListener(){
+                viewHolder.mView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
 
-                        Toast.makeText(getActivity(), post_key, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(view.getContext(),CardViewTabbed.class);
+                        intent.putExtra("post_key",post_key);
+
+                        intent.putExtra("ImageUrl",model.getImageUrl());
+                        intent.putExtra("Category",model.getCategory());
+                        intent.putExtra("Name",model.getName());
+                        intent.putExtra("Phone Number",model.getPhone());
+                        intent.putExtra("Link",model.getLink());
+                        intent.putExtra("Address",model.getAddress());
+                        intent.putExtra("Latitude", model.getLatitude());
+                        intent.putExtra("Longitude", model.getLongitude());
+
+                        view.getContext().startActivity(intent);
 
                     }
-                });*/
+                });
 
 
 
@@ -184,14 +197,14 @@ public class TabExplore extends Fragment {
                 Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch1);
-                Picasso.get().load(imgUrl1).
+                Picasso.get().load(imgUrl2).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch2);
-                Picasso.get().load(imgUrl1).
+                Picasso.get().load(imgUrl3).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch3);
-                Picasso.get().load(imgUrl1).
-                        transform(new RoundCornersTransformation(20, 2, true, true)).
+                Picasso.get().load(imgUrl4).
+                        transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(imgHotSearch4);
 
                 txtHotSearch1.setText(txt1);

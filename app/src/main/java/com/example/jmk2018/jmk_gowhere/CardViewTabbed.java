@@ -45,17 +45,14 @@ public class CardViewTabbed extends AppCompatActivity
 
     private String cardCategory;
     private String cardName;
-    //private String cardLocation;
     private String cardImageUrl;
     private String cardPhoneNumber;
     private String cardLink;
     private String cardAddress;
     private Double cardLatitude;
     private Double cardLongitude;
-    //private Integer cardNumofLikes;
-    //private ProgressBar imgProgressBar;
 
-    private DatabaseReference mDatabaseHotSearch;
+    private DatabaseReference mDatabasePhotos;
 
     private ImageView photo1;
     private ImageView photo2;
@@ -66,13 +63,35 @@ public class CardViewTabbed extends AppCompatActivity
 
     private static final int REQUEST_PHONE_CALL = 1;
 
+    private String post_key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_tabbed_new);
 
+        cardCategory = getIntent().getStringExtra("Category");
+        cardName = getIntent().getStringExtra("Name");
+        cardAddress = getIntent().getStringExtra("Address");
+        cardPhoneNumber = getIntent().getStringExtra("Phone Number");
+        cardLink = getIntent().getStringExtra("Link");
+        cardLatitude = getIntent().getDoubleExtra("Latitude", 0.00);
+        cardLongitude = getIntent().getDoubleExtra("Longitude", 0.00);
+        post_key = getIntent().getStringExtra("post_key");
+
+
         allPhotos = (TextView) findViewById(R.id.allPhotos);
         allPhotos.setPaintFlags(allPhotos.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        allPhotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(CardViewTabbed.this,PhotoGallery.class);
+                intent.putExtra("post_key",post_key);
+                startActivity(intent);
+
+            }
+        });
 
         ImageView imgImage = (ImageView) findViewById(R.id.image);
         cardImageUrl = getIntent().getStringExtra("ImageUrl");
@@ -82,7 +101,6 @@ public class CardViewTabbed extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         TextView txtName = (TextView) findViewById(R.id.name);
-        //TextView txtLocation = (TextView) findViewById(R.id.location);
         TextView txtCategory = (TextView) findViewById(R.id.category);
         TextView txtPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         TextView txtLink = (TextView) findViewById(R.id.link);
@@ -104,44 +122,40 @@ public class CardViewTabbed extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        cardCategory = getIntent().getStringExtra("Category");
-        cardName = getIntent().getStringExtra("Name");
-        //String cardLocation = getIntent().getStringExtra("Location");
-        cardAddress = getIntent().getStringExtra("Address");
-        cardPhoneNumber = getIntent().getStringExtra("Phone Number");
-        cardLink = getIntent().getStringExtra("Link");
-        cardLatitude = getIntent().getDoubleExtra("Latitude", 0.00);
-        cardLongitude = getIntent().getDoubleExtra("Longitude", 0.00);
+
 
         txtCategory.setText(cardCategory);
         txtName.setText(cardName);
-        //txtLocation.setText(cardLocation);
         txtPhoneNumber.setText(cardPhoneNumber);
         txtLink.setText(cardLink);
         txtAddress.setText(cardAddress);
 
-        mDatabaseHotSearch = FirebaseDatabase.getInstance().getReference().child("HotSearch");
+        mDatabasePhotos = FirebaseDatabase.getInstance().getReference().child("Photos");
 
-        mDatabaseHotSearch.addValueEventListener(new ValueEventListener() {
-
+        mDatabasePhotos.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String imgUrl1 = dataSnapshot.child("1").getValue(String.class);
-                String imgUrl2 = dataSnapshot.child("2").getValue(String.class);
-                String imgUrl3 = dataSnapshot.child("3").getValue(String.class);
-                String imgUrl4 = dataSnapshot.child("4").getValue(String.class);
+                String imgUrl1 = dataSnapshot.child(post_key).child("1").getValue(String.class);
+                String imgUrl2 = dataSnapshot.child(post_key).child("2").getValue(String.class);
+                String imgUrl3 = dataSnapshot.child(post_key).child("3").getValue(String.class);
+                String imgUrl4 = dataSnapshot.child(post_key).child("4").getValue(String.class);
+
+                /*Glide.with(getApplicationContext()).load(imgUrl1).into(photo1);
+                Glide.with(getApplicationContext()).load(imgUrl2).into(photo2);
+                Glide.with(getApplicationContext()).load(imgUrl3).into(photo3);
+                Glide.with(getApplicationContext()).load(imgUrl4).into(photo4);*/
 
                 Picasso.get().load(imgUrl1).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(photo1);
-                Picasso.get().load(imgUrl1).
+                Picasso.get().load(imgUrl2).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(photo2);
-                Picasso.get().load(imgUrl1).
+                Picasso.get().load(imgUrl3).
                         transform(new RoundCornersTransformation(20, 1, true, true)).
                         into(photo3);
-                Picasso.get().load(imgUrl1).
+                Picasso.get().load(imgUrl4).
                         transform(new RoundCornersTransformation(20, 2, true, true)).
                         into(photo4);
 
@@ -149,7 +163,6 @@ public class CardViewTabbed extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
 
             }
         });

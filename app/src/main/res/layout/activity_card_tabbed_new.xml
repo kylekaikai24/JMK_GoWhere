@@ -39,7 +39,7 @@
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -279,6 +279,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -290,6 +291,7 @@
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toEndOf="@+id/photo1"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -301,6 +303,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="19dp"
                     android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toStartOf="@+id/photo4"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -312,6 +315,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -332,7 +336,7 @@
                     android:id="@+id/button"
                     android:layout_width="89dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:background="#F97E39"
                     android:text="@string/upload"

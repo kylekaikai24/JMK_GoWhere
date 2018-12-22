@@ -66,6 +66,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
                 intent.putExtra("Address",cAddress);
                 intent.putExtra("Latitude", cLatitude);
                 intent.putExtra("Longitude", cLongitude);
+
                 //intent.putExtra("Tab",0);
 
                 v.getContext().startActivity(intent);
