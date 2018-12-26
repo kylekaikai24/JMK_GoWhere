@@ -1,9 +1,11 @@
 package com.example.jmk2018.jmk_gowhere;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -34,13 +36,28 @@ public class PhotoGallery extends AppCompatActivity {
 
         post_key = getIntent().getStringExtra("post_key");
 
+        mDatabasePhotos = FirebaseDatabase.getInstance().getReference("Photos").child(post_key);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+
+        FirebaseRecyclerAdapter<Photos,PhotoHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Photos, PhotoHolder>
+                (Photos.class, R.layout.gallery_photos_new, PhotoHolder.class, mDatabasePhotos){
+
+            @Override
+            protected void populateViewHolder(final PhotoHolder viewHolder, final Photos model, int position){
+
+                viewHolder.setImage(getApplicationContext(), model.getImageUrl());
+
+            }
+        };
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
 
 
     }
+
 
 
 

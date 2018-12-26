@@ -136,10 +136,10 @@ public class CardViewTabbed extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String imgUrl1 = dataSnapshot.child(post_key).child("1").getValue(String.class);
-                String imgUrl2 = dataSnapshot.child(post_key).child("2").getValue(String.class);
-                String imgUrl3 = dataSnapshot.child(post_key).child("3").getValue(String.class);
-                String imgUrl4 = dataSnapshot.child(post_key).child("4").getValue(String.class);
+                String imgUrl1 = dataSnapshot.child(post_key).child("1").child("imageUrl").getValue(String.class);
+                String imgUrl2 = dataSnapshot.child(post_key).child("2").child("imageUrl").getValue(String.class);
+                String imgUrl3 = dataSnapshot.child(post_key).child("3").child("imageUrl").getValue(String.class);
+                String imgUrl4 = dataSnapshot.child(post_key).child("4").child("imageUrl").getValue(String.class);
 
                 /*Glide.with(getApplicationContext()).load(imgUrl1).into(photo1);
                 Glide.with(getApplicationContext()).load(imgUrl2).into(photo2);

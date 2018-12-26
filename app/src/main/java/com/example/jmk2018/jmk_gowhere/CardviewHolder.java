@@ -37,7 +37,6 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
     Integer cBooking;
 
     ImageView likeButton;
-    ImageView likeArea;
     DatabaseReference mDatabaseLike;
     FirebaseAuth mAuth;
 
