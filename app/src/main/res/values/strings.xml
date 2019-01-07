@@ -110,4 +110,8 @@
     <string name="google_status_fmt">Google User: %s</string>
     <string name="all_photos"> All Photos </string>
     <string name="upload"> Upload </string>
+
+    <string name="title_activity_full_screen_image">FullScreenImageActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -64,6 +65,8 @@ public class CardViewTabbed extends AppCompatActivity
     private static final int REQUEST_PHONE_CALL = 1;
 
     private String post_key;
+
+    private Button uploadPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,8 @@ public class CardViewTabbed extends AppCompatActivity
         photo2 = (ImageView) findViewById(R.id.photo2);
         photo3 = (ImageView) findViewById(R.id.photo3);
         photo4 = (ImageView) findViewById(R.id.photo4);
+
+        uploadPhoto = (Button) findViewById(R.id.uploadPhoto);
 
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.cardviewtabbed_content);
 

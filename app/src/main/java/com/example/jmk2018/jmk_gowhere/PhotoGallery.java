@@ -43,7 +43,7 @@ public class PhotoGallery extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
         FirebaseRecyclerAdapter<Photos,PhotoHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Photos, PhotoHolder>
-                (Photos.class, R.layout.gallery_photos_new, PhotoHolder.class, mDatabasePhotos){
+                (Photos.class, R.layout.gallery_photos, PhotoHolder.class, mDatabasePhotos){
 
             @Override
             protected void populateViewHolder(final PhotoHolder viewHolder, final Photos model, int position){
