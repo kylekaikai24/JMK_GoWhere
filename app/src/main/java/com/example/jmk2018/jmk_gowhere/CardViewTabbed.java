@@ -63,6 +63,7 @@ public class CardViewTabbed extends AppCompatActivity
     private TextView allPhotos;
 
     private static final int REQUEST_PHONE_CALL = 1;
+    private static final int GALLERY_INTENT = 2;
 
     private String post_key;
 
@@ -126,8 +127,6 @@ public class CardViewTabbed extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         txtCategory.setText(cardCategory);
         txtName.setText(cardName);
@@ -211,6 +210,18 @@ public class CardViewTabbed extends AppCompatActivity
 
                 view.getContext().startActivity(browserIntent);
 
+
+            }
+        });
+
+        uploadPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+
+                startActivityForResult(intent,GALLERY_INTENT);
 
             }
         });

@@ -49,9 +49,9 @@ public class TabPromotion extends Fragment{
     public void onStart(){
         super.onStart();
         FirebaseRecyclerAdapter<Database, CardviewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Database, CardviewHolder>
-                (Database.class, R.layout.database_cardview, CardviewHolder.class, mDatabase){
+                (Database.class, R.layout.database_cardview_new, CardviewHolder.class, mDatabase){
             @Override
-            protected void populateViewHolder(CardviewHolder viewHolder, Database model, int position){
+            protected void populateViewHolder(CardviewHolder viewHolder, final Database model, int position){
                 viewHolder.setCategory(model.getCategory());
                 viewHolder.setName(model.getName());
                 viewHolder.setLocation(model.getLocation());
@@ -62,6 +62,30 @@ public class TabPromotion extends Fragment{
                 viewHolder.setLongitude(model.getLongitude());
                 viewHolder.setKeywords(model.getKeywords());
                 viewHolder.setLink(model.getLink());
+
+                final String post_key = getRef(position).getKey();
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+
+                        Intent intent = new Intent(view.getContext(),CardViewTabbed.class);
+                        intent.putExtra("post_key",post_key);
+
+                        intent.putExtra("ImageUrl",model.getImageUrl());
+                        intent.putExtra("Category",model.getCategory());
+                        intent.putExtra("Name",model.getName());
+                        intent.putExtra("Phone Number",model.getPhone());
+                        intent.putExtra("Link",model.getLink());
+                        intent.putExtra("Address",model.getAddress());
+                        intent.putExtra("Latitude", model.getLatitude());
+                        intent.putExtra("Longitude", model.getLongitude());
+
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
+
             }
         };
 

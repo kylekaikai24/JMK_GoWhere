@@ -52,7 +52,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
 
         mDatabaseLike.keepSynced(true);
 
-        itemView.setOnClickListener(new View.OnClickListener(){
+        /*itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), CardViewTabbed.class);
@@ -70,7 +70,7 @@ public class CardviewHolder extends RecyclerView.ViewHolder{
 
                 v.getContext().startActivity(intent);
             }
-        });
+        });*/
 
 
 
