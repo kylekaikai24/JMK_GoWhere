@@ -2,11 +2,13 @@ package com.example.jmk2018.jmk_gowhere;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -32,16 +35,21 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.ImageViewTargetFactory;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import static java.security.AccessController.getContext;
 
-public class CardViewTabbed extends AppCompatActivity
+public class CardViewTabbed extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String cardCategory;
@@ -54,6 +62,7 @@ public class CardViewTabbed extends AppCompatActivity
     private Double cardLongitude;
 
     private DatabaseReference mDatabasePhotos;
+    private StorageReference mStorage;
 
     private ImageView photo1;
     private ImageView photo2;
@@ -136,14 +145,16 @@ public class CardViewTabbed extends AppCompatActivity
 
         mDatabasePhotos = FirebaseDatabase.getInstance().getReference().child("Photos");
 
+        mStorage = FirebaseStorage.getInstance().getReference();
+
         mDatabasePhotos.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String imgUrl1 = dataSnapshot.child(post_key).child("1").child("imageUrl").getValue(String.class);
-                String imgUrl2 = dataSnapshot.child(post_key).child("2").child("imageUrl").getValue(String.class);
-                String imgUrl3 = dataSnapshot.child(post_key).child("3").child("imageUrl").getValue(String.class);
-                String imgUrl4 = dataSnapshot.child(post_key).child("4").child("imageUrl").getValue(String.class);
+                final String imgUrl1 = dataSnapshot.child(post_key).child("1").child("imageUrl").getValue(String.class);
+                final String imgUrl2 = dataSnapshot.child(post_key).child("2").child("imageUrl").getValue(String.class);
+                final String imgUrl3 = dataSnapshot.child(post_key).child("3").child("imageUrl").getValue(String.class);
+                final String imgUrl4 = dataSnapshot.child(post_key).child("4").child("imageUrl").getValue(String.class);
 
                 /*Glide.with(getApplicationContext()).load(imgUrl1).into(photo1);
                 Glide.with(getApplicationContext()).load(imgUrl2).into(photo2);
@@ -162,6 +173,55 @@ public class CardViewTabbed extends AppCompatActivity
                 Picasso.get().load(imgUrl4).
                         transform(new RoundCornersTransformation(20, 2, true, true)).
                         into(photo4);
+
+
+                photo1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(view.getContext(), FullScreenImageActivity.class);
+                        intent.putExtra("ImageUrl", imgUrl1);
+
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
+
+                photo2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(view.getContext(), FullScreenImageActivity.class);
+                        intent.putExtra("ImageUrl", imgUrl2);
+
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
+
+                photo3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(view.getContext(), FullScreenImageActivity.class);
+                        intent.putExtra("ImageUrl", imgUrl3);
+
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
+
+                photo4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(view.getContext(), FullScreenImageActivity.class);
+                        intent.putExtra("ImageUrl", imgUrl4);
+
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
 
             }
 
@@ -223,8 +283,37 @@ public class CardViewTabbed extends AppCompatActivity
 
                 startActivityForResult(intent,GALLERY_INTENT);
 
+
             }
         });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+
+            Uri uri = data.getData();
+
+            StorageReference filepath = mStorage.child("uploadPhoto").child(uri.getLastPathSegment());
+
+            showProgressDialog();
+
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    Toast.makeText(CardViewTabbed.this, "Upload Done!", Toast.LENGTH_LONG).show();
+
+                    hideProgressDialog();
+                }
+            });
+
+
+
+        }
 
     }
 
@@ -287,4 +376,5 @@ public class CardViewTabbed extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
