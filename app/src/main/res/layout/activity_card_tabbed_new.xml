@@ -279,7 +279,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -292,7 +291,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toStartOf="@+id/photo3"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/photo1"
@@ -306,7 +304,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="19dp"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toStartOf="@+id/photo4"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />
@@ -318,7 +315,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/photos"
                     app:srcCompat="@color/browser_actions_divider_color" />

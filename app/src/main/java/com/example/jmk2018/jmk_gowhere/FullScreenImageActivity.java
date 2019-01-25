@@ -1,8 +1,11 @@
 package com.example.jmk2018.jmk_gowhere;
 
+import android.animation.Animator;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +18,9 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
     String imageUrl;
     ImageView fullSreenImage;
+
+    private Animator mCurrentAnimator;
+    private int mShortAnimationDuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,8 @@ public class FullScreenImageActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(imageUrl).into(fullSreenImage);
 
     }
+
+
 
 
 }

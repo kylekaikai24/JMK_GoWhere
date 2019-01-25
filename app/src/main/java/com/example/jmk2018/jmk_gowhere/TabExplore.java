@@ -7,12 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -195,16 +193,16 @@ public class TabExplore extends Fragment {
                 String txt4 = dataSnapshot.child("8").getValue(String.class);
 
                 Picasso.get().load(imgUrl1).
-                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        transform(new RoundCornersTransformation_not_used(20, 1, true, true)).
                         into(imgHotSearch1);
                 Picasso.get().load(imgUrl2).
-                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        transform(new RoundCornersTransformation_not_used(20, 1, true, true)).
                         into(imgHotSearch2);
                 Picasso.get().load(imgUrl3).
-                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        transform(new RoundCornersTransformation_not_used(20, 1, true, true)).
                         into(imgHotSearch3);
                 Picasso.get().load(imgUrl4).
-                        transform(new RoundCornersTransformation(20, 1, true, true)).
+                        transform(new RoundCornersTransformation_not_used(20, 1, true, true)).
                         into(imgHotSearch4);
 
                 txtHotSearch1.setText(txt1);

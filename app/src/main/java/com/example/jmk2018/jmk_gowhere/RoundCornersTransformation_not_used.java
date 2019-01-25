@@ -14,7 +14,7 @@ import android.graphics.Shader;
 // original idea here : http://www.curious-creature.org/2012/12/11/android-recipe-1-image-with-rounded-corners/
 // https://gist.github.com/aprock/6213395
 // https://gist.github.com/amardeshbd/06b491d4adb568b1b226a20d4953a180
-public class RoundCornersTransformation implements com.squareup.picasso.Transformation {
+public class RoundCornersTransformation_not_used implements com.squareup.picasso.Transformation {
     private final int radius;  // dp
     private final int margin;  // dp
     private String KEY = "";
@@ -27,7 +27,7 @@ public class RoundCornersTransformation implements com.squareup.picasso.Transfor
      * @param radius radius is corner radii in dp
      * @param margin margin is the board in dp
      */
-    public RoundCornersTransformation(final int radius, final int margin) {
+    public RoundCornersTransformation_not_used(final int radius, final int margin) {
         this.radius = radius;
         this.margin = margin;
         if (KEY.isEmpty()) KEY = "rounded_" + radius + margin;
@@ -42,8 +42,8 @@ public class RoundCornersTransformation implements com.squareup.picasso.Transfor
      * @param topCornersOnly Rounded corner for top corners only.
      * @param bottomCornersOnly Rounded corner for bottom corners only.
      */
-    public RoundCornersTransformation(final int radius, final int margin, boolean topCornersOnly,
-                                      boolean bottomCornersOnly) {
+    public RoundCornersTransformation_not_used(final int radius, final int margin, boolean topCornersOnly,
+                                               boolean bottomCornersOnly) {
         this(radius, margin);
         topCorners = topCornersOnly;
         bottomCorners = bottomCornersOnly;
