@@ -178,11 +178,23 @@ public class SearchItemActivity extends AppCompatActivity {
             record3.setVisibility(View.VISIBLE);
             record3.setText(Paper.book().getAllKeys().get(Paper.book().getAllKeys().size()-3));
 
+        } else {
+
+            record1.setVisibility(View.GONE);
+            record2.setVisibility(View.GONE);
+            record3.setVisibility(View.GONE);
+
         }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Paper.book().destroy();
+
+                record1.setVisibility(View.GONE);
+                record2.setVisibility(View.GONE);
+                record3.setVisibility(View.GONE);
 
                 Log.d(TAG,Paper.book().getAllKeys().toString());
                 //Toast.makeText(SearchItemActivity.this,,Toast.LENGTH_LONG).show();
@@ -197,6 +209,7 @@ public class SearchItemActivity extends AppCompatActivity {
                 hits.setVisibility(View.GONE);
                 searchWithoutHits.setVisibility(View.VISIBLE);
                 searchBox.setQuery("",false);
+                searchBox.requestFocus();
 
                 if (Paper.book().getAllKeys().size() == 1){
 
