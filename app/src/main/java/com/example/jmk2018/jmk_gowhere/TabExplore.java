@@ -109,7 +109,6 @@ public class TabExplore extends Fragment {
 
                         Intent intent = new Intent(view.getContext(),CardViewTabbed.class);
                         intent.putExtra("post_key",post_key);
-
                         intent.putExtra("ImageUrl",model.getImageUrl());
                         intent.putExtra("Category",model.getCategory());
                         intent.putExtra("Name",model.getName());

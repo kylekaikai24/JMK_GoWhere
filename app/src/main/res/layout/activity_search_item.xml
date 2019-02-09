@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:algolia="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:algolia="http://schemas.android.com/apk/res-auto"
     tools:context=".SearchItemActivity">
 
     <com.algolia.instantsearch.ui.views.SearchBox
         android:id="@+id/searchBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +24,41 @@
         android:id="@+id/hits"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        algolia:autoHideKeyboard="true"
         algolia:itemLayout="@layout/database_cardview_hits_item"
+        algolia:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBox" />
+
+    <include
+        layout="@layout/search_without_hits"
+        android:id="@+id/searchWithoutHits"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        algolia:layout_constraintBottom_toBottomOf="parent"
+        algolia:layout_constraintEnd_toEndOf="parent"
+        algolia:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBox" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        algolia:layout_constraintEnd_toEndOf="parent"
+        algolia:layout_constraintHorizontal_bias="0.781"
+        algolia:layout_constraintStart_toStartOf="parent"
+        algolia:layout_constraintTop_toTopOf="parent"
+        algolia:srcCompat="@color/colorPrimaryDark" />
 
 </android.support.constraint.ConstraintLayout>
